@@ -1,6 +1,8 @@
 plugins {
     id 'java'
     id 'war'
+    id 'jacoco'
+    id "org.sonarqube" version '3.0'
 }
 
 group 'de.brachwitz.leon'
@@ -8,6 +10,13 @@ version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
+}
+
+[
+    "integrationtests",
+    "slf4j",
+].each {
+    apply from: "gradle/${it}.gradle"
 }
 
 ext {
@@ -28,3 +37,33 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+
+jacoco {
+    toolVersion = "0.8.5"
+    reportsDir = file("$buildDir/jacoco")
+}
+
+task mergeJacocoReports(type: JacocoReport) {
+    dependsOn test, integrationTest
+    sourceDirectories.setFrom files(sourceSets.main.allSource.srcDirs)
+    classDirectories.setFrom files(sourceSets.main.output)
+    executionData.setFrom project.fileTree(dir: '.', include: '**/build/jacoco/*.exec')
+    reports {
+        xml.enabled true
+        csv.enabled false
+        html.enabled true
+        html.destination file("${buildDir}/jacoco/merge")
+        xml.destination file("${buildDir}/jacoco/merge.xml")
+    }
+}
+
+sonarqube {
+    properties {
+        property "sonar.projectKey", "LeonBrachwitz_Minesweeper"
+        property "sonar.organization", "leonbrachwitz"
+        property "sonar.host.url", "https://sonarcloud.io"
+        property "sonar.coverage.jacoco.xmlReportPaths", "${buildDir}/jacoco/merge.xml"
+    }
+}
+
+tasks['sonarqube'].dependsOn mergeJacocoReports
