@@ -29,6 +29,7 @@ targetCompatibility = 1.8
 dependencies {
     compileOnly('jakarta.platform:jakarta.jakartaee-web-api:9.0.0-RC1')
     implementation('org.eclipse.persistence:org.eclipse.persistence.jpa:3.0.0-M1')
+    implementation('org.primefaces:primefaces:7.0')
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
