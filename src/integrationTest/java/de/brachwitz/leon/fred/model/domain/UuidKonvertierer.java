@@ -1,4 +1,4 @@
-package de.brachwitz.leon.fred.domain;
+package de.brachwitz.leon.fred.model.domain;
 
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
