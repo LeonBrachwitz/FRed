@@ -1,11 +1,11 @@
-CREATE SCHEMA `feuerwehr` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin ;
+CREATE SCHEMA `fredds` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin ;
 CREATE USER 'leon'@'%' IDENTIFIED BY 'passwort';
-GRANT ALL PRIVILEGES ON `feuerwehr`.* TO 'leon'@'%' IDENTIFIED BY 'passwort';
+GRANT ALL PRIVILEGES ON `fredds`.* TO 'leon'@'%' IDENTIFIED BY 'passwort';
 CREATE USER 'leon'@'localhost' IDENTIFIED BY 'passwort';
-GRANT ALL PRIVILEGES ON `feuerwehr`.* TO 'leon'@'localhost' IDENTIFIED BY 'passwort';
+GRANT ALL PRIVILEGES ON `fredds`.* TO 'leon'@'localhost' IDENTIFIED BY 'passwort';
 FLUSH privileges;
 
-USE feuerwehr;
+USE fredds;
 
 CREATE TABLE `benutzer` (
   `id` VARCHAR(36) NOT NULL,

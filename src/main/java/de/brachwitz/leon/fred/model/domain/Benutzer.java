@@ -14,5 +14,5 @@ public class Benutzer implements Serializable
 
     @EmbeddedId
     private Primaerschluessel id;
-    private String name;
+    private String username;
 }
